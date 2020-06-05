@@ -11,16 +11,15 @@ const ADMIN: &str = "admin";
 // ------ ------
 
 fn init(url: Url, orders: &mut impl Orders<Msg>) -> Model {
-    let base_url = url.to_base_url();
     orders
         .subscribe(Msg::UrlChanged)
-        .notify(subs::UrlChanged(url));
+        .notify(subs::UrlChanged(url.clone()));
 
     Model {
         ctx: Context {
             logged_user: "John Doe",
         },
-        base_url,
+        base_url: url.truncate_relative_path(),
         page_id: None,
         admin_model: None,
     }
@@ -61,7 +60,7 @@ impl<'a> Urls<'a> {
         self.base_url()
     }
     pub fn admin_urls(self) -> page::admin::Urls<'a> {
-        page::admin::Urls::new(self.base_url().add_path_part(ADMIN))
+        page::admin::Urls::new(self.base_url().push_path_part(ADMIN))
     }
 }
 
@@ -76,7 +75,7 @@ enum Msg {
 fn update(msg: Msg, model: &mut Model, _: &mut impl Orders<Msg>) {
     match msg {
         Msg::UrlChanged(subs::UrlChanged(mut url)) => {
-            model.page_id = match url.next_path_part() {
+            model.page_id = match url.pop_relative_path_part() {
                 None => Some(PageId::Home),
                 Some(ADMIN) => {
                     page::admin::init(url, &mut model.admin_model).map(|_| PageId::Admin)
