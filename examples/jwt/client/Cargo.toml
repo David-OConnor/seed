@@ -1,0 +1,13 @@
+[package]
+name = "client"
+version = "0.1.0"
+authors = ["Your Name <email@address.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/lib.rs"
+
+[dependencies]
+seed = { path = "../../../" }
+serde = { version = "1.0.114", features = ["derive"] }
