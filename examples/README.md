@@ -31,6 +31,9 @@ Intended as a demo of basic functionality.
 ### [Custom Elements](custom_elements)
 How to create and use custom elements.
 
+### [Drag And Drop](drag_and_drop)
+How to drag and drop simple items.
+
 ### [Drop Zone](drop_zone)
 How to create a drop-zone.
 
