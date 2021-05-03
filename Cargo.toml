@@ -129,6 +129,7 @@ members = [
     "examples/custom_elements",
     "examples/drop_zone",
     "examples/el_key",
+    "examples/experimental_component",
     "examples/graphql",
     "examples/i18n",
     "examples/markdown",
@@ -163,3 +164,4 @@ exclude = [
 default = ["panic-hook"]
 panic-hook = ["console_error_panic_hook"]
 markdown = ["pulldown-cmark"]
+experimental-component-api = []
